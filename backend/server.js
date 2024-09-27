@@ -13,6 +13,11 @@ const port = process.env.PORT || 8000;
 const app = express();
 
 // middleware
+
+app.options('*', cors({
+  origin: process.env.CLIENT_URL,
+  credentials: true
+}));
 app.use(
   cors({
     origin: [process.env.CLIENT_URL], // Allow the frontend URL
@@ -21,6 +26,7 @@ app.use(
     allowedHeaders: ['Content-Type', 'Authorization'], // Specify allowed headers
   })
 );
+
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
