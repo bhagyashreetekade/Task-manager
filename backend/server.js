@@ -15,10 +15,13 @@ const app = express();
 // middleware
 app.use(
   cors({
-    origin: process.env.CLIENT_URL,
-    credentials: true,
+    origin: [process.env.CLIENT_URL], // Allow the frontend URL
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Include allowed methods
+    credentials: true, // Allow cookies to be sent with requests
+    allowedHeaders: ['Content-Type', 'Authorization'], // Specify allowed headers
   })
 );
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
